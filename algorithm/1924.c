@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-static char wordSet[7][4] = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
-static int daySet[12] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30};
+const char wordSet[7][4] = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
+const int daySet[12] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 };
 
 int main(int argc, char** argv)
 {
