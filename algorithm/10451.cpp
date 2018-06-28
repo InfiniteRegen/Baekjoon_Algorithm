@@ -1,23 +1,23 @@
 #include <stdio.h>
 #include <string.h>
+#include <vector>
+#include <algorithm>
 
-#define TRUE  1
-#define FALSE 0
+using namespace std;
 
 int T, N;
-int map[1001][1001];
-int visited[1001][1001];
-int counter = 0;
+vector<int> a[1001];
+int chk[1001];
+int ans;
 
-void DFS(int x, int y)
+void DFS(int node)
 {
-	visited[x][y] = TRUE;
+	chk[node] = 1;
 
-	for (int j = 1; j <= N; ++j) {
-		for (int k = 1; k <= N; ++k) {
-			if (map[j][k] && !visited[j][k]) {
-				DFS(j, k);
-			}
+	for (int i = 0; i < a[node].size(); i++) {
+		int next = a[node][i];
+		if (chk[next] != 1) {
+			DFS(next);
 		}
 	}
 
@@ -26,32 +26,34 @@ void DFS(int x, int y)
 
 int main(int argc, char** argv)
 {
-	int number;
+	int V;
 
 	scanf("%d", &T);
 
-	for (int i = 0; i < T; ++i) {
-		scanf("%d", &N);
-		counter = 0;
-		memset(map, 0x00, sizeof(map));
-		memset(visited, 0x00, sizeof(visited));
+	for (int k = 0; k < T; ++k) {
 
-		for (int j = 1; j <= N; ++j) {
-			scanf("%d", &number);
-			map[j][number] = TRUE;
-			map[number][j] = TRUE;
+		scanf("%d", &N);
+		for (int i = 1; i <= N; i++) {
+			scanf("%d", &V);
+			a[i].push_back(V);
 		}
 
-		for (int j = 1; j <= N; ++j) {
-			for (int k = 1; k <= N; ++k) {
-				if (map[j][k] && !visited[j][k]) {
-					DFS(j, k);
-				}
+		for (int i = 1; i <= N; i++) {
+			if (chk[i] != 1) {
+				DFS(i);
+				ans++;
 			}
 		}
-		
-		printf("%d\n", counter);
 
+		printf("%d\n", ans);
+
+		for (int i = 1; i <= N; i++) {
+			fill(a[i].begin(), a[i].end(), 0);
+		}
+		memset(chk, 0, sizeof(chk));
+
+		ans = 0;
 	}
+
 	return 0;
 }
