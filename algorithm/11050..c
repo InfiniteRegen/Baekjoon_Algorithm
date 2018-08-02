@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int main(int argc, char** argv)
+{
 	int N, K;
 	int FactorialN = 1, FactorialK = 1, FactorialNK = 1;
 
